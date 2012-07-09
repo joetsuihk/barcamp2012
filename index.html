@@ -126,8 +126,12 @@
     <div class="step slide" data-x="-1000" data-y="-1500">
         <h1>Mid size to me:</h1>
         <ul>
-            <li>No template language</li>
             <li>Do not need core/modules setup</li>
+            <li>No js template language</li>
+            <li>Do not need a clear MVC/MCC pattern</li>
+        </ul>
+        <br />
+        <ul>
             <li>More than 5 js files to manage</li>
             <li>Spaghetti code is no good</li>
         </ul>
@@ -172,7 +176,9 @@
     <div class="step slide" data-x="2000" data-y="500">
         <h1>NoSQL</h1>
         <h3>key value store</h3>
-        <p>[game_id]:[user_id]:[score]</p>
+        <p>[game_id]:[user_id]:score => 2</p>
+        <p>[game_id]:[user_id]:color => red</p>
+        <p>[game_id]:global:[user_list] => 1234,3456</p>
     </div>
 
     <div class="step slide" data-x="3000" data-y="-1500">
@@ -189,7 +195,7 @@
         </ul>
     </div>
     <div class="step slide" data-x="3000" data-y="500">
-        <h1>JUST PLAY A FCUKING MIDI</h1>
+        <h1>JUST PLAY A <span style="color:#f00;">#@%&ING</span> MIDI</h1>
     </div>
 
     <div class="step slide" data-x="4000" data-y="-1500">
@@ -201,13 +207,26 @@
     </div>
     <div class="step slide" data-x="4000" data-y="500">
         <h1>Web socket</h1>
+        <h3>Socket.io</h3>
     </div>
     <div class="step slide" data-x="4000" data-y="1500">
-        <h1>Socket.io</h1>
+        <h1>JS API</h1>
+        <h3>Uplink</h3>
+        <p>socket.emit('event', { game_id: config.game_id });</p>
+        <h3>Downlink</h3>
+        <p>socket.on('event', 'callback_function')</p>
     </div>
     <div class="step slide" data-x="4000" data-y="2500">
-        <h1>Server component added</h1>
-        <p>node.js</p>
+        <h1>Node.js API</h1>
+        <h3>Listen to events</h3>
+        <p>socket.on('event', 'callback_function')</p>
+        <h3>Broadcast (to other clients)</h3>
+        <p>socket.broadcast.emit('event',{});</p>
+    </div>
+    <div class="step slide" data-x="4000" data-y="3500">
+        <h1>Rooms</h1>
+        <p>socket.join(room_id); //join a room</p>
+        <p>socket.broadcast.to(room_id).emit('event',{}); //tell others in the same room</p>
     </div>
 
     <div class="step slide" data-x="5000" data-y="-1500">
@@ -224,11 +243,20 @@
             <li>fast</li>
             <li>fun, easy to use</li>
         </ul>
+        <h3>Reuse session storage data schema</h3>
     </div>
     <div class="step slide" data-x="5000" data-y="1500">
-        <h1>Reuse session storage data schema</h1>
-        <h3>transparent mapping</h3>
-        <p>[game_id]:[user_id]:[score]</p>
+        <h1>Redis: Hash</h1>
+        <h3>HMSET [namespace] [key] [value] ...</h3>
+        <p>>HMSET user:1000 username antirez password P1pp0</p>
+        <p>>HGETALL user:1000</p>
+        <p>username => antirez</p>
+        <p>password => P1pp0</p>
+    </div>
+    <div class="step slide" data-x="5000" data-y="2500">
+        <h1>transparent mapping</h1>
+        <h3>[game_id]:[user_id]:score => 2</h3>
+        <h3>redis_client.hset([game_id]+':'+[user_id], score, 2);</h3>
     </div>
 
     <div class="step slide" data-x="6000" data-y="-1500">
@@ -246,6 +274,11 @@
         <h3>What to do when user clicks during a fade?</h3>
         <p>Getting dirty hands there</p>
     </div>
+    <div class="step slide" data-x="6000" data-y="2500">
+        <h1>Managing "state" added unintented complex</h1>
+        <h3>Moving, static, disappearing etc etc</h3>
+        
+    </div>
 
     <div class="step slide" data-x="7000" data-y="-1500">
         <h1>Event based architecture</h1>
@@ -253,11 +286,17 @@
     </div>
     <div class="step slide" data-x="7000" data-y="-500">
         <q>on()</q>
-        <code></code>
+        <code>.on( events, handler(eventObject) )</code>
         <q>trigger()</q>
-        <code></code>
+        <code>.trigger( eventType [, extraParameters] )</code>
     </div>
     <div class="step slide" data-x="7000" data-y="500">
+        <q>trigger()</q>
+        <code>user.trigger('add-score', [score:1])</code>
+        <q>on()</q>
+        <code>user.on('add-score', 'add_score_storage');</code>
+    </div>
+    <div class="step slide" data-x="7000" data-y="1500">
         <h1>Effectively decoupling code into meaningful context/files</h1>
         <h3>Apps better organised</h3>
         <h3>Code become modular</h3>
@@ -268,7 +307,34 @@
         <h1>Mulitple event handler</h1>
     </div>
     <div class="step slide" data-x="8000" data-y="-500">
-        <h1>2 on() listening to the save trigger()</h1>
+        <q>trigger()</q>
+        <code>user.trigger('add-score', [score:1])</code>
+        <q>on()</q>
+        <code>user.on('add-score', 'add_score_storage');</code>
+        <br />
+        <code>user.on('add-score', 'add_score_broadcast');</code>
+        <br />
+        <code>user.on('add-score', 'add_score_sound');</code>
+    </div>
+    <div class="step slide" data-x="8000" data-y="500">
+        <h1>2+ on() listening to the same event</h1>
+    </div>
+
+    <div class="step slide" data-x="9000" data-y="-1500">
+        pic for stack overview
+    </div>
+
+    <div class="step slide" data-x="10000" data-y="-1500">
+        <h1>Credits</h1>
+        <ul>
+            <li>Powered by impress.js</li>
+        </ul>
+    </div>
+
+    <div class="step slide" data-x="11000" data-y="-1500">
+        <h1>Thanks!</h1>
+        <h3>Joe Tsui (@joetsuihk)</h3>
+        
     </div>
     <!--
         
@@ -349,7 +415,7 @@
         CSS transfrom docs: https://developer.mozilla.org/en/CSS/transform
         
     -->
-    <div id="overview" class="step" data-x="3500" data-y="750" data-scale="7">
+    <div id="overview" class="step" data-x="4500" data-y="1000" data-scale="9">
     </div>
 
 </div>
@@ -378,9 +444,7 @@
     Just sayin' ;)
     
 -->
-<div class="hint">
-    <p>Use a spacebar or arrow keys to navigate</p>
-</div>
+
 <script>
 if ("ontouchstart" in document.documentElement) { 
     document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
