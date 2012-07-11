@@ -321,14 +321,22 @@
         <q>trigger()</q>
         <code>user.trigger('add-score', [score:1])</code>
         <q>on()</q>
-        <code>user.on('add-score', 'add_score_storage');</code>
+        <code>user.on('add-score', 'add_score_storage'); //localstorage.js</code>
         <br />
-        <code>user.on('add-score', 'add_score_broadcast');</code>
+        <code>user.on('add-score', 'add_score_broadcast'); //socket.js</code>
         <br />
-        <code>user.on('add-score', 'add_score_sound');</code>
+        <code>user.on('add-score', 'add_score_sound'); //sound.js</code>
     </div>
     <div class="step slide" data-x="8000" data-y="500">
         <h1>2+ on() listening to the same event</h1>
+    </div>
+    <div class="step slide" data-x="8000" data-y="1500">
+        <h1>Can work with modernizr</h1>
+        <h3>Event catchers are distributed to files<h3>
+    </div>
+    <div class="step slide" data-x="8000" data-y="2500">
+        <h1>Can use a more robust PubSub</h1>
+        <h3>DOM performance is not that great</h3>
     </div>
 
     <div class="step slide" data-x="9000" data-y="-1500">
