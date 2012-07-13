@@ -165,11 +165,11 @@
         <h1>API:</h1>
         <h3>Set</h3>
         <code>
-            window.sessionStorage.setItem(key, value);
+            <script src="https://gist.github.com/3104124.js?file=Set session storage API.js"></script>
         </code>
         <h3>Get</h3>
         <code>
-            window.sessionStorage.getItem(key);
+            <script src="https://gist.github.com/3104124.js?file=Get session storage API.js"></script>
         </code>
     </div>
 
@@ -190,7 +190,7 @@
         <ul>
             <li><a href="http://www.html5rocks.com/en/features/multimedia">html5rocks</a></li>
             <li><a href="http://www.html5rocks.com/en/tutorials/webaudio/intro/">Getting started with web audio API</a></li>
-            <li><a href="http://www.html5rocks.com/en/tutorials/webaudio/games/">Developing gmae audio with the web audio API</a></li>
+            <li><a href="http://www.html5rocks.com/en/tutorials/webaudio/games/">Developing game audio with the web audio API</a></li>
             <li><a href="http://www.cuttherope.ie/dev/">Cut the rope</a></p>
         </ul>
     </div>
@@ -212,21 +212,20 @@
     <div class="step slide" data-x="4000" data-y="1500">
         <h1>JS API</h1>
         <h3>Uplink</h3>
-        <p>socket.emit('event', { game_id: config.game_id });</p>
+        <script src="https://gist.github.com/3104124.js?file=socket uplink.js"></script>
         <h3>Downlink</h3>
-        <p>socket.on('event', 'callback_function')</p>
+        <script src="https://gist.github.com/3104124.js?file=socket downlink.js"></script>
     </div>
     <div class="step slide" data-x="4000" data-y="2500">
         <h1>Node.js API</h1>
         <h3>Listen to events</h3>
-        <p>socket.on('event', 'callback_function')</p>
+        <script src="https://gist.github.com/3104124.js?file=socket uplink.js"></script>
         <h3>Broadcast (to other clients)</h3>
-        <p>socket.broadcast.emit('event',{});</p>
+        <script src="https://gist.github.com/3104124.js?file=broadcast.js"></script>
     </div>
     <div class="step slide" data-x="4000" data-y="3500">
         <h1>Rooms</h1>
-        <p>socket.join(room_id); //join a room</p>
-        <p>socket.broadcast.to(room_id).emit('event',{}); //tell others in the same room</p>
+        <script src="https://gist.github.com/3104124.js?file=join a room.js"></script>
     </div>
 
     <div class="step slide" data-x="5000" data-y="-1500">
@@ -297,15 +296,15 @@
     </div>
     <div class="step slide" data-x="7000" data-y="1500">
         <q>trigger()</q>
-        <code>.trigger( eventType [, extraParameters] )</code>
+        <script src="https://gist.github.com/3104124.js?file=tigger.js"></script>
         <q>on()</q>
-        <code>.on( events, handler(eventObject) )</code>
+        <script src="https://gist.github.com/3104124.js?file=on.js"></script>
     </div>
     <div class="step slide" data-x="7000" data-y="2500">
         <q>trigger()</q>
-        <code>user.trigger('add-score', [score:1])</code>
+        <script src="https://gist.github.com/3104124.js?file=user add score.js"></script>
         <q>on()</q>
-        <code>user.on('add-score', 'add_score_storage');</code>
+        <script src="https://gist.github.com/3104124.js?file=user add score storage.js"></script>
     </div>
     <div class="step slide" data-x="7000" data-y="3500">
         <h1>Effectively decoupling code into meaningful context/files</h1>
@@ -347,6 +346,7 @@
         <h1>Credits</h1>
         <ul>
             <li>Powered by impress.js</li>
+            <li>Code highlighting by Gist</li>
         </ul>
     </div>
 

@@ -36,3 +36,9 @@ p {
 	color:#aaa;
     margin-bottom:10px;
 }
+.gist {
+    font-size: 18px;
+}
+.gist-meta {
+    font-size: 12px;
+}
